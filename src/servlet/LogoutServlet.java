@@ -36,7 +36,12 @@ public class LogoutServlet extends ChatServlet {
                 // СброситьID сессии в cookie
                 response.addCookie(new Cookie("sessionId", null));
                 // Перенаправить наглавную страницу
+                String systemMessage =  " Пользователь " + aUser.getName() + " вышел из чата " ;
                 response.sendRedirect(response.encodeRedirectURL("/lab8/"));
+                synchronized (messages) {
+                    ChatMessage str = new ChatMessage(systemMessage, aUser, Calendar.getInstance().getTimeInMillis(),"red");
+                    messages.add(str);
+                }
             }
             else{
                 // Пользователь пытается аннулировать чужую сессию –// неделатьничего

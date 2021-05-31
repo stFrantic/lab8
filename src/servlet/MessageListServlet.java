@@ -23,7 +23,9 @@ public class MessageListServlet extends ChatServlet {
         for(int i=messages.size()-1; i>=0; i--) {
 
             ChatMessage aMessage = messages.get(i);
-
+            if (aMessage.getStyle() == "red"){
+                pw.println("<div><font color = \"red\" ><strong>" + aMessage.getAuthor().getName() + "</strong>: " + aMessage.getMessage() + "</font></div>");
+            }else
             pw.println("<div><strong>" + aMessage.getAuthor().getName() + "</strong>: " + aMessage.getMessage() + "</div>");
         }
         pw.println("</body></html>");
